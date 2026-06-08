@@ -16,15 +16,28 @@ Token Sentinel fixes that. It runs as a background daemon, reads the session tra
 
 **Real-time cost tracking**: Claude Code and Kiro session is parsed the moment it completes. Costs are computed from the actual Anthropic API pricing table, not estimates. You see spend per session, per project, and as a daily total with a 7-day rolling average.
 
+<img width="1788" height="408" alt="TS-Cost" src="https://github.com/user-attachments/assets/96203662-9958-4bc6-831d-6c3b0cf26fbf" />
+
 **MCP tool audit**: agentic tools load every configured MCP tool schema into the context window of every API call, whether the tool gets used or not. Each unused tool schema costs ~300 tokens per call. On a 60-call session with 30 unused tools, that's 54,000 wasted tokens. Token Sentinel identifies exactly which tools are dead weight and gives you copy-paste commands to prune them; with clear advice on what's safe to remove and what Claude uses internally for reasoning.
+
+<img width="2476" height="1728" alt="TS-MCP-ANALYSES" src="https://github.com/user-attachments/assets/c6296770-3eca-4af4-af9a-a23d6cbbd06e" />
 
 **Budget alerts**: Windows toast notifications fire when a session costs 2× your project average, when a new session starts with excessive unused tools loaded, when your daily budget hits 80% and 100%, and when your cache hit ratio collapses (a signal that something changed in your context structure).
 
+<img width="820" height="410" alt="toast-mcp-waste" src="https://github.com/user-attachments/assets/5e858191-7315-4fd2-9f8f-1e92c1eb911c" />
+
+
 **Ambient cost display**: shell prompt shows today's spend, session count, and budget percentage every time you open a terminal or launch `claude`. No dashboard to remember to check.
+
 
 **Kiro spec annotator**: between spec generation and task execution, Kiro gives you a window to make model tier decisions. Token Sentinel scores each task in `.kiro/specs/tasks.md` for complexity and writes an inline recommendation (`haiku` or `sonnet`) directly under the task heading. Haiku tasks are ~4× cheaper. The recommendations are *advisory*.
 
+<img width="1284" height="478" alt="kiro-model-reccs-tokensentinel" src="https://github.com/user-attachments/assets/131b8d9c-3386-4e04-97c6-893c17e0a801" />
+
+
 **Before/after comparison**: capture a cost snapshot, make a change (prune tools, adjust config), run more sessions, compare. The output tells you whether your change was a genuine efficiency gain or just less work done.
+
+<img width="3792" height="1174" alt="TS-COST-ANAYL" src="https://github.com/user-attachments/assets/e8eecb95-ac50-4f01-a8fd-8409e804c6bc" />
 
 ---
 
